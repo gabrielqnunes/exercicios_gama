@@ -4,7 +4,21 @@ from os import system
 class Main:
     @classmethod
     def run(self):
-        self.register_customers()
+        customers = self.register_customers()
+        taller_customer = self.get_taller(customers)
+        smaller_customer = self.get_smaller(customers)
+        fatter_customer = self.get_fatter(customers)
+        skinnier_customer = self.get_skinnier(customers)
+
+        system('clear')
+        print('The taller customer is {} with {}m.'.format(
+            taller_customer["code"], taller_customer["height"]))
+        print('The smallest customer is {} with {}m.'.format(
+            smaller_customer["code"], smaller_customer["height"]))
+        print('The fatter customer is {} with {}kg.'.format(
+            fatter_customer["code"], fatter_customer["weight"]))
+        print('The skinnier customer is {} with {}kg.'.format(
+            skinnier_customer["code"], skinnier_customer["weight"]))
 
     @classmethod
     def register_customers(self):
@@ -48,7 +62,6 @@ class Main:
 
                 customer_code = -1
 
-        print(customers)
         return customers
 
     @staticmethod
@@ -77,6 +90,46 @@ class Main:
             if user_input == None:
                 print('The input must be a float number.')
         return user_input
+
+    @staticmethod
+    def get_taller(customers):
+        taller = {"height": 0}
+
+        for customer in customers:
+            if customer["height"] > taller["height"]:
+                taller = customer
+
+        return taller
+
+    @staticmethod
+    def get_smaller(customers):
+        smaller = {"height": 1000}
+
+        for customer in customers:
+            if customer["height"] < smaller["height"]:
+                smaller = customer
+
+        return smaller
+
+    @staticmethod
+    def get_fatter(customers):
+        fatter = {"weight": 0}
+
+        for customer in customers:
+            if customer["weight"] > fatter["weight"]:
+                fatter = customer
+
+        return fatter
+
+    @staticmethod
+    def get_skinnier(customers):
+        skinner = {"weight": 1000}
+
+        for customer in customers:
+            if customer["weight"] < skinner["weight"]:
+                skinner = customer
+
+        return skinner
 
 
 main = Main()
