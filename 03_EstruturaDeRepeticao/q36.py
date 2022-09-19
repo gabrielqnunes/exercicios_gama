@@ -5,9 +5,12 @@ class Main:
         first_multiplication_number = self.handle_int_input(
             'Insert the first multiplication number: '
         )
-        last_multiplication_number = self.handle_int_input(
-            'Insert the last multiplication number: '
-        )
+        last_multiplication_number = 0
+
+        while last_multiplication_number < first_multiplication_number:
+            last_multiplication_number = self.handle_int_input(
+                'Insert the last multiplication number: '
+            )
 
         self.print_multiplication_table(
             number, first_multiplication_number, last_multiplication_number)
