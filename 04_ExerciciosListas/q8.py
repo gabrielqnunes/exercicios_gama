@@ -6,7 +6,7 @@ from rich.panel import Panel
 from rich.table import Table
 from utils import screen, input
 
-console = Console(height=3, width=40,)
+console = Console(height=3, width=50)
 layout = Layout()
 
 
@@ -37,21 +37,23 @@ class Main:
 
     def input_people(self) -> list:
         people = []
-        screen.clear()
 
         for i in range(1, 6):
+            screen.clear()
+
             person = Person()
 
-            layout.update(Panel(
-                "Insert the {} person's age".format(i)
-            ))
-            console.print(layout)
-            console.input('[underline][bold]Answer:[/underline][/bold] ')
-            console.input(layout)
+            input_message = "Insert the {} person's age and height.".format(i)
+            console.width = len(input_message) + 4
 
-            person.set_age(input.integer_number_positive(''))
+            layout.update(Panel(input_message))
+            console.print(layout)
+
+            person.set_age(input.integer_number_positive(
+                'Age:'
+            ))
             person.set_height(input.float_number_positive(
-                "Insert the {} person's height: ".format(i)
+                'Height:'
             ))
             people.append(person)
         return people
